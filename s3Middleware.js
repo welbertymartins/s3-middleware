@@ -16,14 +16,15 @@ const getObjectContent = async(Key) => {
     const params = { Bucket, Key }
     const data = await S3.getObject(params).promise()
     const content = data.Body.toString('utf-8')
+    const err = {}
     const ok = true
-    return { ok, content }
+    return { ok, content, err }
   } 
-  catch (e) 
+  catch (err) 
   {
     const ok = false
     const content = ""
-    return { ok, content }
+    return { ok, content, err }
   }
 }
 
@@ -31,11 +32,14 @@ const putObject = async(Key, Body, ContentType = 'application/json') => {
   try 
   { 
     await S3.putObject({ Body, Bucket, ContentType, Key }).promise()
-    return true
+    const ok = true
+    const err = {}
+    return { ok, err }
   } 
-  catch (e) 
+  catch (err) 
   {
-    return false 
+    const ok = false
+    return { ok, err }
   }
 }
 
