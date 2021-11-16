@@ -22,8 +22,8 @@ const getObjectContent = async(Key) => {
   } 
   catch (err) 
   {
-    const ok = false
     const content = ""
+    const ok = false
     return { ok, content, err }
   }
 }
@@ -32,8 +32,8 @@ const putObject = async(Key, Body, ContentType = 'application/json') => {
   try 
   { 
     await S3.putObject({ Body, Bucket, ContentType, Key }).promise()
-    const ok = true
     const err = {}
+    const ok = true
     return { ok, err }
   } 
   catch (err) 
