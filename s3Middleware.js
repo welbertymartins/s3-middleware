@@ -28,7 +28,7 @@ const getObjectContent = async(Key) => {
   }
 }
 
-const putObject = async(Key, Body, ContentType = 'application/json') => {
+const putObjectContent = async(Key, Body, ContentType = 'application/json') => {
   try 
   { 
     await S3.putObject({ Body, Bucket, ContentType, Key }).promise()
@@ -43,4 +43,4 @@ const putObject = async(Key, Body, ContentType = 'application/json') => {
   }
 }
 
-module.exports = { getObjectContent, putObject }
+module.exports = { getObjectContent, putObjectContent }
