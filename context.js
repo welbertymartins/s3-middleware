@@ -3,7 +3,12 @@ const getRequestId = (event) => event["requestContext"]["requestId"]
 const getBodyRequest = (event) => event["body"]
 const getParam = (event, key) => event["queryStringParameters"][key]
 
-const headers = { public: {"Access-Control-Allow-Origin" : "*" } }
+const headers = { 
+    public: {
+        "Access-Control-Allow-Origin" : "*" 
+    } 
+}
+
 const statusCodes = {
     ok: 200,
     notFound: 406,
