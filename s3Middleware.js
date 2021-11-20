@@ -1,14 +1,14 @@
 const AWS = require("aws-sdk")
-const context = require("./lambdaMiddleware")
+const lambdaMiddleware = require("./lambdaMiddleware")
 
-const region = context.getEnv("AWS_S3_Region")
-const accessKeyId = context.getEnv("AWS_S3_PublicKey")
-const secretAccessKey = context.getEnv("AWS_S3_PrivateKey")
+const region = lambdaMiddleware.getEnv("AWS_S3_Region")
+const accessKeyId = lambdaMiddleware.getEnv("AWS_S3_PublicKey")
+const secretAccessKey = lambdaMiddleware.getEnv("AWS_S3_PrivateKey")
 
 AWS.config.update({ region, accessKeyId, secretAccessKey })
 
 const S3 = new AWS.S3()
-const Bucket = context.getEnv("AWS_S3_Bucket")
+const Bucket = lambdaMiddleware.getEnv("AWS_S3_Bucket")
 
 const getObjectContent = async(Key) => {
   try 
