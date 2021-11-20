@@ -1,5 +1,5 @@
 const AWS = require("aws-sdk")
-const context = require("./context")
+const context = require("./lambdaMiddleware")
 
 const region = context.getEnv("AWS_S3_Region")
 const accessKeyId = context.getEnv("AWS_S3_PublicKey")
