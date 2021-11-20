@@ -1,0 +1,19 @@
+{
+  "name": "s3-middleware",
+  "version": "1.0.0",
+  "description": "This is an simple S3 middleware project to use in other projects.",
+  "main": "s3Middleware",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/welbertymartins/node-14-s3-middleware.git"
+  },
+  "author": "welbertymartins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/welbertymartins/node-14-s3-middleware/issues"
+  },
+  "homepage": "https://github.com/welbertymartins/node-14-s3-middleware#readme"
+}
