@@ -1,8 +1,12 @@
 {
   "name": "s3-middleware",
-  "version": "1.0.0",
-  "description": "This is an simple S3 middleware project to use in other projects.",
-  "keywords": ["s3", "s3 middleware", "s3 middle"],
+  "version": "1.0.1",
+  "description": "This is an simple S3 middleware to use in other projects.",
+  "keywords": [
+    "s3",
+    "s3 middleware",
+    "s3 middle"
+  ],
   "main": "s3Middleware.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -18,11 +22,17 @@
     "url": "https://github.com/welbertymartins/node-14-s3-middleware/issues"
   },
   "homepage": "https://github.com/welbertymartins/node-14-s3-middleware#readme",
-  "engines": {
-    "npm": ">=6.0.0",
-    "node": ">=14.0.0"
-  },
   "dependencies": {
-    "aws-sdk": "^2.1033.0"
+    "aws-sdk": "^2.1033.0",
+    "wam-lambda-middleware": "^2.1.5"
+  },
+  "devDependencies": {
+    "chai": "4.3.4",
+    "mocha": "9.1.3",
+    "nyc": "15.1.0"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
