@@ -43,17 +43,21 @@ const putObjectContent = async(Key, Body, ContentType = 'application/json') => {
   }
 }
 
-const exists = async(Key) => {
-  const params = { Bucket, Key }
-  return await S3.headObject(params)
-  .promise()
-  .then(() => true)
-  .catch((err) => {
-    if (err.code === 'NotFound') {
-      return false
-    }
-    return true
-  })
+const exists = async(Key, precision = true) => {
+  try {
+    const params = { Bucket, Key }
+    return await S3.headObject(params)
+    .promise()
+    .then(() => true)
+    .catch((err) => {
+      if (err.code === 'NotFound') {
+        return false
+      }
+      return precision
+    })
+  } catch (err) {
+    return precision
+  }
 }
 
 module.exports = { getObjectContent, putObjectContent, exists }
