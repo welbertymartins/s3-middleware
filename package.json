@@ -1,6 +1,6 @@
 {
   "name": "s3-middleware",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "This is an simple S3 middleware to use in other projects.",
   "keywords": [
     "s3",
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/welbertymartins/node-14-s3-middleware.git"
+    "url": "git+https://github.com/welbertymartins/s3-middleware.git"
   },
   "author": "welbertymartins",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/welbertymartins/node-14-s3-middleware/issues"
+    "url": "https://github.com/welbertymartins/s3-middleware/issues"
   },
-  "homepage": "https://github.com/welbertymartins/node-14-s3-middleware#readme",
+  "homepage": "https://github.com/welbertymartins/s3-middleware#readme",
   "dependencies": {
     "aws-sdk": "^2.1033.0",
     "wam-lambda-middleware": "^2.1.5"
