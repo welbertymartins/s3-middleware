@@ -50,12 +50,13 @@ const exists = async(Key, precision = true) => {
     .promise()
     .then(() => true)
     .catch((err) => {
-      if (err.code === 'NotFound') {
+      if (err.code == 'Forbidden') {
         return false
       }
       return precision
     })
   } catch (err) {
+    console.log(err)
     return precision
   }
 }
