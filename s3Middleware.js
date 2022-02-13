@@ -1,5 +1,7 @@
 const AWS = require('aws-sdk')
 const lambdaMiddleware = require('wam-lambda-middleware')
+const getObjectContentCache = require('wam-cache-middleware').getObjectContent
+const putObjectContentCache = require('wam-cache-middleware').putObjectContent
 
 const region = lambdaMiddleware.getEnv('AWS_S3_Region')
 const accessKeyId = lambdaMiddleware.getEnv('AWS_S3_PublicKey')
@@ -12,11 +14,20 @@ const Bucket = lambdaMiddleware.getEnv('AWS_S3_Bucket')
 
 const getObjectContent = async(Key) => {
   try 
-  {
+  { 
+    const objectContentCache = getObjectContentCache(Key)
+
+    if (objectContentCache.length > 1) {
+      const ok = true
+      const content = objectContentCache
+      const err = false
+      return { ok, content, err }
+    }
+
     const params = { Bucket, Key }
     const data = await S3.getObject(params).promise()
     const content = data.Body.toString('utf-8')
-    const err = {}
+    const err = false
     const ok = true
     return { ok, content, err }
   } 
@@ -61,4 +72,4 @@ const exists = async(Key, precision = true) => {
   }
 }
 
-module.exports = { getObjectContent, putObjectContent, exists }
+module.exports = { getObjectContent, putObjectContent, putObjectContentCache, exists }
