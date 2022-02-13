@@ -1,6 +1,6 @@
 {
   "name": "s3-middleware",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "This is an simple S3 middleware to use in other projects.",
   "keywords": [
     "s3",
@@ -9,7 +9,7 @@
   ],
   "main": "s3Middleware.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nyc --reporter=html mocha",
     "build": "npm prune --production"
   },
   "repository": {
@@ -23,16 +23,17 @@
   },
   "homepage": "https://github.com/welbertymartins/s3-middleware#readme",
   "dependencies": {
-    "aws-sdk": "^2.1033.0",
+    "aws-sdk": "^2.1073.0",
+    "wam-cache-middleware": "^1.0.6",
     "wam-lambda-middleware": "^2.1.5"
   },
   "devDependencies": {
-    "chai": "4.3.4",
-    "mocha": "9.1.3",
-    "nyc": "15.1.0"
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3",
+    "nyc": "^15.1.0"
   },
   "engineStrict": true,
   "engines": {
-    "node": ">=14.0.0"
+    "node": "14.*"
   }
 }
