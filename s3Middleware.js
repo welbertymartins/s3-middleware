@@ -39,11 +39,18 @@ const getObjectContent = async(Key) => {
   }
 }
 
-const putObjectContent = async(Key, Body, ContentType = 'application/json') => {
+const putObjectContent = async(Key, Body, onlyCache = false, ContentType = 'application/json') => {
   try 
   { 
+    if (onlyCache) {
+      putObjectContentCache(Key, Body)
+      const ok = true
+      const err = false
+      return { ok, err }
+    }
+
     await S3.putObject({ Body, Bucket, ContentType, Key }).promise()
-    const err = {}
+    const err = falses
     const ok = true
     return { ok, err }
   } 
@@ -72,4 +79,4 @@ const exists = async(Key, precision = true) => {
   }
 }
 
-module.exports = { getObjectContent, putObjectContent, putObjectContentCache, removeObjectContentCache, exists }
+module.exports = { getObjectContent, putObjectContent, removeObjectContentCache, exists }
