@@ -13,9 +13,8 @@ AWS.config.update({ region, accessKeyId, secretAccessKey })
 const S3 = new AWS.S3()
 const Bucket = lambdaMiddleware.getEnv('AWS_S3_Bucket')
 
-const getObjectContent = async(Key) => {
-  try 
-  { 
+const getObjectContent = async (Key) => {
+  try {
     const objectContentCache = getObjectContentCache(Key)
     if (objectContentCache.length > 0) {
       const ok = true
@@ -30,18 +29,22 @@ const getObjectContent = async(Key) => {
     const err = false
     const ok = true
     return { ok, content, err }
-  } 
-  catch (err) 
-  {
+  }
+  catch (err) {
     const content = ''
     const ok = false
     return { ok, content, err }
   }
 }
 
-const putObjectContent = async(Key, Body, onlyCache = false, ContentType = 'application/json') => {
-  try 
-  { 
+const putObjectContent = async (Key, Body, onlyCache = false, ContentType = 'application/json') => {
+  try {
+    if (Body.length == 0) {
+      const ok = true
+      const err = false
+      return { ok, err }
+    }
+
     if (onlyCache) {
       putObjectContentCache(Key, Body)
       const ok = true
@@ -53,26 +56,25 @@ const putObjectContent = async(Key, Body, onlyCache = false, ContentType = 'appl
     const err = falses
     const ok = true
     return { ok, err }
-  } 
-  catch (err) 
-  {
+  }
+  catch (err) {
     const ok = false
     return { ok, err }
   }
 }
 
-const exists = async(Key, precision = true) => {
+const exists = async (Key, precision = true) => {
   try {
     const params = { Bucket, Key }
     return await S3.headObject(params)
-    .promise()
-    .then(() => true)
-    .catch((err) => {
-      if (err.code == 'Forbidden') {
-        return false
-      }
-      return precision
-    })
+      .promise()
+      .then(() => true)
+      .catch((err) => {
+        if (err.code == 'Forbidden') {
+          return false
+        }
+        return precision
+      })
   } catch (err) {
     console.log(err)
     return precision
