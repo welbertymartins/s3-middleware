@@ -16,7 +16,6 @@ const getObjectContent = async(Key) => {
   try 
   { 
     const objectContentCache = getObjectContentCache(Key)
-
     if (objectContentCache.length > 0) {
       const ok = true
       const content = objectContentCache
