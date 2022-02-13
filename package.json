@@ -1,6 +1,6 @@
 {
   "name": "s3-middleware",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "This is an simple S3 middleware to use in other projects.",
   "keywords": [
     "s3",
@@ -24,7 +24,7 @@
   "homepage": "https://github.com/welbertymartins/s3-middleware#readme",
   "dependencies": {
     "aws-sdk": "^2.1073.0",
-    "wam-cache-middleware": "^1.0.6",
+    "wam-cache-middleware": "^1.0.8",
     "wam-lambda-middleware": "^2.1.5"
   },
   "devDependencies": {
