@@ -13,8 +13,15 @@ AWS.config.update({ region, accessKeyId, secretAccessKey })
 const S3 = new AWS.S3()
 const Bucket = lambdaMiddleware.getEnv('AWS_S3_Bucket')
 
-const getObjectContent = async (Key) => {
+const getObjectContent = async (Key, onlyCache = false) => {
   try {
+    if (onlyCache) {
+      const ok = true
+      const content = getObjectContentCache(Key)
+      const err = false
+      return { ok, content, err }
+    }
+
     const objectContentCache = getObjectContentCache(Key)
     if (objectContentCache.length > 0) {
       const ok = true
