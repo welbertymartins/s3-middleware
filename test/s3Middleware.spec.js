@@ -1,5 +1,5 @@
 const expect = require("chai").expect
-const { getObjectContent, putObjectContent, removeObjectContentCache } = require("../s3Middleware")
+const { getObjectContent, putObjectContent, removeObjectContentCache, exists } = require("../s3Middleware")
 
 describe("S3 Middleware", function () {
 
@@ -14,19 +14,17 @@ describe("S3 Middleware", function () {
             ok: true,
             err: false,
         })
+        expect(await exists(key, true)).to.equal(true)
     })
 
     it("Put Clean Object Content", async () => {
         const key = 'hello.json'
-        const object = {
-            foo: 'bar',
-            fizz: 'buzz'
-        }
         const objectContent = ``
         expect(await putObjectContent(key, objectContent, true)).to.deep.equal({
             ok: true,
             err: false,
         })
+        expect(await exists(key, true)).to.equal(true)
     })
 
     it("Get Object Content", async () => {
@@ -53,5 +51,6 @@ describe("S3 Middleware", function () {
         const key = 'hello.json'
         expect(removeObjectContentCache(key)).to.equal(true)
         expect((await getObjectContent(key)).content).to.equal(``)
+        expect(await exists(key, true)).to.equal(false)
     })
 })
