@@ -47,7 +47,7 @@ describe("S3 Middleware", function () {
         expect((await getObjectContent(key, true)).content).to.equal(objectContent)
     })
 
-    it("Get Remove Object Content", async () => {
+    it("Get Removed Object Content", async () => {
         const key = 'hello.json'
         expect(removeObjectContentCache(key)).to.equal(true)
         expect((await getObjectContent(key)).content).to.equal(``)
