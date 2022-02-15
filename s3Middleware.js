@@ -16,8 +16,8 @@ const Bucket = lambdaMiddleware.getEnv('AWS_S3_Bucket')
 const getObjectContent = async (Key, onlyCache = false) => {
   try {
     if (onlyCache) {
-      const ok = true
       const content = getObjectContentCache(Key)
+      const ok = content.length > 0
       const err = false
       return { ok, content, err }
     }
