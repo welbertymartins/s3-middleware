@@ -70,8 +70,12 @@ const putObjectContent = async (Key, Body, onlyCache = false, ContentType = 'app
   }
 }
 
-const exists = async (Key, precision = true) => {
+const exists = async (Key, onlyCache = false, precision = true) => {
   try {
+    if (onlyCache) {
+      return (await getObjectContent(Key, onlyCache)).ok
+    }
+
     const params = { Bucket, Key }
     return await S3.headObject(params)
       .promise()
