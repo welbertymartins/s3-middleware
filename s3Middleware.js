@@ -1,17 +1,17 @@
-const AWS = require('aws-sdk')
-const lambdaMiddleware = require('wam-lambda-middleware')
-const getObjectContentCache = require('wam-cache-middleware').getObjectContent
-const putObjectContentCache = require('wam-cache-middleware').putObjectContent
-const removeObjectContentCache = require('wam-cache-middleware').removeObjectContent
+const AWS = require("aws-sdk")
+const lambdaMiddleware = require("wam-lambda-middleware")
+const getObjectContentCache = require("wam-cache-middleware").getObjectContent
+const putObjectContentCache = require("wam-cache-middleware").putObjectContent
+const removeObjectContentCache = require("wam-cache-middleware").removeObjectContent
 
-const region = lambdaMiddleware.getEnv('AWS_S3_Region')
-const accessKeyId = lambdaMiddleware.getEnv('AWS_S3_PublicKey')
-const secretAccessKey = lambdaMiddleware.getEnv('AWS_S3_PrivateKey')
+const region = lambdaMiddleware.getEnv("AWS_S3_Region")
+const accessKeyId = lambdaMiddleware.getEnv("AWS_S3_PublicKey")
+const secretAccessKey = lambdaMiddleware.getEnv("AWS_S3_PrivateKey")
 
 AWS.config.update({ region, accessKeyId, secretAccessKey })
 
 const S3 = new AWS.S3()
-const Bucket = lambdaMiddleware.getEnv('AWS_S3_Bucket')
+const Bucket = lambdaMiddleware.getEnv("AWS_S3_Bucket")
 
 const getObjectContent = async (Key, onlyCache = false) => {
   try {
@@ -32,19 +32,19 @@ const getObjectContent = async (Key, onlyCache = false) => {
 
     const params = { Bucket, Key }
     const data = await S3.getObject(params).promise()
-    const content = data.Body.toString('utf-8')
+    const content = data.Body.toString("utf-8")
     const err = false
     const ok = true
     return { ok, content, err }
   }
   catch (err) {
-    const content = ''
+    const content = ""
     const ok = false
     return { ok, content, err }
   }
 }
 
-const putObjectContent = async (Key, Body, onlyCache = false, ContentType = 'application/json') => {
+const putObjectContent = async (Key, Body, onlyCache = false, ContentType = "application/json") => {
   try {
     if (Body.length == 0) {
       const ok = true
@@ -81,7 +81,7 @@ const exists = async (Key, onlyCache = false, precision = true) => {
       .promise()
       .then(() => true)
       .catch((err) => {
-        if (err.code == 'Forbidden') {
+        if (err.code == "Forbidden") {
           return false
         }
         return precision
