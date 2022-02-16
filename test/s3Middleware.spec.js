@@ -4,10 +4,10 @@ const { getObjectContent, putObjectContent, removeObjectContentCache, exists } =
 describe("S3 Middleware", function () {
 
     it("Put Object Content", async () => {
-        const key = 'hello.json'
+        const key = "hello.json"
         const object = {
-            foo: 'bar',
-            fizz: 'buzz'
+            foo: "bar",
+            fizz: "buzz"
         }
         const objectContent = JSON.stringify(object)
         expect(await putObjectContent(key, objectContent, true)).to.deep.equal({
@@ -18,7 +18,7 @@ describe("S3 Middleware", function () {
     })
 
     it("Put Clean Object Content", async () => {
-        const key = 'hello.json'
+        const key = "hello.json"
         const objectContent = ``
         expect(await putObjectContent(key, objectContent, true)).to.deep.equal({
             ok: true,
@@ -28,27 +28,27 @@ describe("S3 Middleware", function () {
     })
 
     it("Get Object Content", async () => {
-        const key = 'hello.json'
+        const key = "hello.json"
         const object = {
-            foo: 'bar',
-            fizz: 'buzz'
+            foo: "bar",
+            fizz: "buzz"
         }
         const objectContent = JSON.stringify(object)
         expect((await getObjectContent(key)).content).to.equal(objectContent)
     })
 
     it("Get Object Content Only Cache", async () => {
-        const key = 'hello.json'
+        const key = "hello.json"
         const object = {
-            foo: 'bar',
-            fizz: 'buzz'
+            foo: "bar",
+            fizz: "buzz"
         }
         const objectContent = JSON.stringify(object)
         expect((await getObjectContent(key, true)).content).to.equal(objectContent)
     })
 
     it("Get Removed Object Content", async () => {
-        const key = 'hello.json'
+        const key = "hello.json"
         expect(removeObjectContentCache(key)).to.equal(true)
         expect((await getObjectContent(key)).content).to.equal(``)
         expect(await exists(key, true)).to.equal(false)
