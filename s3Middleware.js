@@ -60,7 +60,7 @@ const putObjectContent = async (Key, Body, onlyCache = false, ContentType = "app
     }
 
     await S3.putObject({ Body, Bucket, ContentType, Key }).promise()
-    const err = falses
+    const err = false
     const ok = true
     return { ok, err }
   }
