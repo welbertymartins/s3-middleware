@@ -34,7 +34,7 @@ describe("S3 Middleware", function () {
             fizz: "buzz"
         }
         const objectContent = JSON.stringify(object)
-        expect((await getObjectContent(key)).content).to.equal(objectContent)
+        expect((await getObjectContent(key, true)).content).to.equal(objectContent)
     })
 
     it("Get Object Content Only Cache", async () => {

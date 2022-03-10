@@ -22,14 +22,6 @@ const getObjectContent = async (Key, onlyCache = false) => {
       return { ok, content, err }
     }
 
-    const objectContentCache = getObjectContentCache(Key)
-    if (objectContentCache.length > 0) {
-      const ok = true
-      const content = objectContentCache
-      const err = false
-      return { ok, content, err }
-    }
-
     const params = { Bucket, Key }
     const data = await S3.getObject(params).promise()
     const content = data.Body.toString("utf-8")
