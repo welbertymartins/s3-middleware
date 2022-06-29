@@ -7,13 +7,12 @@ const removeObjectContentCache = require("wam-cache-middleware").removeObjectCon
 const region = lambdaMiddleware.getEnv("AWS_S3_Region")
 const accessKeyId = lambdaMiddleware.getEnv("AWS_S3_PublicKey")
 const secretAccessKey = lambdaMiddleware.getEnv("AWS_S3_PrivateKey")
-
-AWS.config.update({ region, accessKeyId, secretAccessKey })
-
-const S3 = new AWS.S3()
 const Bucket = lambdaMiddleware.getEnv("AWS_S3_Bucket")
 
-const getObjectContent = async (Key, onlyCache = false) => {
+AWS.config.update({ region, accessKeyId, secretAccessKey })
+const S3 = new AWS.S3()
+
+const getObjectContent = async(Key, onlyCache = false) => {
   try {
     if (onlyCache) {
       const content = getObjectContentCache(Key)
@@ -24,19 +23,20 @@ const getObjectContent = async (Key, onlyCache = false) => {
 
     const params = { Bucket, Key }
     const data = await S3.getObject(params).promise()
+    
+    const ok = true
     const content = data.Body.toString("utf-8")
     const err = false
-    const ok = true
     return { ok, content, err }
   }
   catch (err) {
-    const content = ""
     const ok = false
+    const content = ""
     return { ok, content, err }
   }
 }
 
-const putObjectContent = async (Key, Body, onlyCache = false, ContentType = "application/json") => {
+const putObjectContent = async(Key, Body, onlyCache = false, ContentType = "application/json") => {
   try {
     if (Body.length == 0) {
       const ok = true
@@ -62,7 +62,7 @@ const putObjectContent = async (Key, Body, onlyCache = false, ContentType = "app
   }
 }
 
-const exists = async (Key, onlyCache = false, precision = true) => {
+const exists = async(Key, onlyCache = false, precision = true) => {
   try {
     if (onlyCache) {
       return (await getObjectContent(Key, onlyCache)).ok
@@ -84,4 +84,9 @@ const exists = async (Key, onlyCache = false, precision = true) => {
   }
 }
 
-module.exports = { getObjectContent, putObjectContent, removeObjectContentCache, exists }
+module.exports = { 
+  getObjectContent,
+  putObjectContent,
+  removeObjectContentCache,
+  exists 
+}
